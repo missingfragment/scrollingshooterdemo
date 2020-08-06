@@ -5,9 +5,11 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class InputHandler : MonoBehaviour
 {
+    // events
     public static event Action<InputAction.CallbackContext> MoveEvent;
     public static event Action<InputAction.CallbackContext> FireEvent;
 
+    // properties
     public static InputHandler Instance { get; private set; }
 
     public PlayerInput PlayerInput { get; private set; }

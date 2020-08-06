@@ -2,51 +2,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Movement))]
-public class Thruster : MonoBehaviour
+namespace SpaceShooterDemo
 {
-    [SerializeField]
-    private GameObject _smallThruster = default;
-    [SerializeField]
-    private GameObject _largeThruster = default;
-    [SerializeField]
-    private ParticleSystem _particleSystem = default;
-
-    private Movement _mover;
-
-    private void Start()
+    [RequireComponent(typeof(Movement))]
+    public class Thruster : MonoBehaviour
     {
-        _mover = GetComponent<Movement>();
-    }
+        [SerializeField]
+        private GameObject smallThruster = default;
+        [SerializeField]
+        private GameObject largeThruster = default;
+        [SerializeField]
+        private ParticleSystem particles = default;
 
-    private void Update()
-    {
-        Vector2 velocity = _mover.Inputs;
-        if (velocity.y > 0)
+        private Movement mover;
+
+        private void Start()
         {
-            _largeThruster.SetActive(true);
-            _smallThruster.SetActive(false);
+            mover = GetComponent<Movement>();
+        }
 
-            if (!_particleSystem.isPlaying)
+        private void Update()
+        {
+            Vector2 velocity = mover.Inputs;
+            if (velocity.y > 0)
             {
-                _particleSystem.Play();
+                largeThruster.SetActive(true);
+                smallThruster.SetActive(false);
+
+                if (!particles.isPlaying)
+                {
+                    particles.Play();
+                }
             }
-        }
-        else if (velocity.y < 0)
-        {
-            _largeThruster.SetActive(false);
-            _smallThruster.SetActive(false);
-
-            _particleSystem.Stop(false, ParticleSystemStopBehavior.StopEmitting);
-        }
-        else
-        {
-            _largeThruster.SetActive(false);
-            _smallThruster.SetActive(true);
-
-            if (!_particleSystem.isPlaying)
+            else if (velocity.y < 0)
             {
-                _particleSystem.Play();
+                largeThruster.SetActive(false);
+                smallThruster.SetActive(false);
+
+                particles.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+            }
+            else
+            {
+                largeThruster.SetActive(false);
+                smallThruster.SetActive(true);
+
+                if (!particles.isPlaying)
+                {
+                    particles.Play();
+                }
             }
         }
     }

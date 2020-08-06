@@ -2,59 +2,87 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement : MonoBehaviour
+namespace SpaceShooterDemo
 {
-    [SerializeField]
-    protected SpriteRenderer _sprite;
-    [SerializeField]
-    protected float _maxSpeed;
-    [SerializeField]
-    protected float _accel;
-    [SerializeField]
-    protected float _decel;
-
-    protected Camera _camera;
-
-    private Vector2 _screenBounds;
-    private float _objectWidth;
-    private float _objectHeight;
-
-    public Vector2 Inputs { get; set; } = new Vector2(0, 0);
-    public Vector2 Velocity { get; private set; } = new Vector2(0, 0);
-
-    void Start()
+    public class Movement : MonoBehaviour
     {
-        _camera = Camera.main;
-        _screenBounds = _camera.ScreenToWorldPoint(
-            new Vector3(Screen.width, Screen.height,
-            _camera.transform.position.z)
-            );
-        _objectWidth = _sprite.bounds.extents.x;
-        _objectHeight = _sprite.bounds.extents.y;
-    }
+        [SerializeField]
+        protected SpriteRenderer sprite;
+        [SerializeField]
+        protected float maxSpeed;
+        [SerializeField]
+        protected float accel;
+        [SerializeField]
+        protected float decel;
+        [SerializeField]
+        protected bool keepInBounds;
 
-    void FixedUpdate()
-    {
-        Velocity -= Velocity.normalized * _decel;
-        Velocity += Inputs * _accel;
+        protected Camera mainCamera;
+
+        private Vector2 screenBounds;
+        private float objectWidth;
+        private float objectHeight;
+
+        public Vector2 Inputs { get; set; } = new Vector2(0, 0);
+        public Vector2 Velocity { get; set; } = new Vector2(0, 0);
+
+        void Start()
+        {
+            mainCamera = Camera.main;
+            screenBounds = mainCamera.ScreenToWorldPoint(
+                new Vector3(Screen.width, Screen.height,
+                mainCamera.transform.position.z)
+                );
+            objectWidth = sprite.bounds.extents.x;
+            objectHeight = sprite.bounds.extents.y;
+        }
+
+        void FixedUpdate()
+        {
+            if (Velocity.magnitude >= decel)
+            {
+                Velocity -= Velocity.normalized * decel;
+            }
+            else
+            {
+                Velocity = Vector2.zero;
+            }
+
+            Velocity += Inputs * accel;
         
 
-        Velocity = Vector2.ClampMagnitude(Velocity, _maxSpeed);
+            Velocity = Vector2.ClampMagnitude(Velocity, maxSpeed);
 
-        transform.Translate(Velocity * Time.deltaTime);
+            transform.Translate(Velocity * Time.deltaTime);
 
-        Vector3 position = transform.position;
+            if (!keepInBounds)
+            {
+                return;
+            }
 
-        position.x = Mathf.Clamp(position.x,
-            -_screenBounds.x + _objectWidth,
-            _screenBounds.x - _objectWidth
-            );
+            // keep object inside the screen boundaries
+            Vector3 position = transform.position;
 
-        position.y = Mathf.Clamp(position.y,
-            -_screenBounds.y + _objectHeight,
-            _screenBounds.y - _objectHeight
-            );
+            position.x = Mathf.Clamp(position.x,
+                -screenBounds.x + objectWidth,
+                screenBounds.x - objectWidth
+                );
 
-        transform.position = position;
+            position.y = Mathf.Clamp(position.y,
+                -screenBounds.y + objectHeight,
+                screenBounds.y - objectHeight
+                );
+
+            if (transform.position.x != position.x)
+            {
+                Velocity = new Vector2(0f, Velocity.y);
+            }
+            else if (transform.position.y != position.y)
+            {
+                Velocity = new Vector2(Velocity.x, 0f);
+            }
+
+            transform.position = position;
+        }
     }
 }
