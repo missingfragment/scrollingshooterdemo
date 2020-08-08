@@ -7,7 +7,14 @@ namespace SpaceShooterDemo
     [RequireComponent(typeof(SpaceShip))]
     public abstract class Weapon : MonoBehaviour, IWeapon
     {
+        // delegates
+
+        // A delegate that stores a function for retrieving
+        // a Projectile from an ObjectPool.
+        protected delegate Projectile GetProjectileFromPool();
+
         // fields
+
         private float cooldownTimer = 0f;
 
         protected Movement mover;
@@ -51,6 +58,32 @@ namespace SpaceShooterDemo
             cooldownTimer = value;
         }
 
+        // public overload from IWweapon, to be implemented by children classes
         public abstract void Fire();
+
+        // protected overload to be called in child implementations
+        // Takes a delegate that supplies it with the proper function
+        // for retrieving a projectile from its respective pool.
+        protected void Fire(GetProjectileFromPool getProjectile)
+        {
+            if (getProjectile == null)
+            {
+                return;
+            }
+
+            Projectile projectile = getProjectile();
+
+
+            projectile.transform.position = transform.position;
+            projectile.transform.rotation = transform.rotation;
+
+            projectile.Mover.Velocity = mover.Velocity;
+
+            projectile.Init(power, alignment, Vector2.up);
+
+            projectile.gameObject.SetActive(true);
+
+            SetCooldownTimer(cooldownDuration);
+        }
     }
 }

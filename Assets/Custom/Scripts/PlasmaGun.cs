@@ -7,21 +7,14 @@ namespace SpaceShooterDemo
     {
         public override void Fire()
         {
-            PlasmaBolt projectile = PlasmaBoltPool.Instance.Get();
+            // Pass the appropriate function into the base class'
+            // Fire() overload function so that it knows how to
+            // get an appropriate projectile.
+            // Doing this lets us avoid copying code for setting up
+            // the projectile into every class.
+            GetProjectileFromPool getProjectile = PlasmaBoltPool.Instance.Get;
 
-
-            projectile.transform.position = transform.position;
-
-            projectile.Mover.Velocity = mover.Velocity;
-
-            Vector3 direction = transform.up;
-            projectile.Init(power, alignment,
-                new Vector2(direction.x, direction.y)
-                );
-
-            projectile.gameObject.SetActive(true);
-
-            SetCooldownTimer(cooldownDuration);
+            Fire(getProjectile);
         }
     }
 }
