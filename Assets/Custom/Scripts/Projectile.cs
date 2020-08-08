@@ -6,6 +6,11 @@ namespace SpaceShooterDemo
     [RequireComponent(typeof(Movement))]
     public abstract class Projectile : MonoBehaviour
     {
+        // constants
+        protected const int PlayerLayer = 8;
+        protected const int EnemyLayer = 9;
+
+        // fields
         private Vector2 direction = Vector2.up;
 
         private VisibilityChecker visibilityChecker;
@@ -41,12 +46,32 @@ namespace SpaceShooterDemo
 
         private void OnVisibilityChanged(bool visible)
         {
+            if (!gameObject.activeSelf)
+            {
+                return;
+            }
+
             if (!visible)
             {
                 Remove();
             }
         }
-        
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            GameObject other = collision.gameObject;
+
+            if ((Alignment == Team.Player && other.layer == EnemyLayer)
+                || (Alignment == Team.Enemy && other.layer == PlayerLayer))
+            {
+                SpaceShip otherShip = other.GetComponent<SpaceShip>();
+
+                otherShip.TakeDamage(Power);
+
+                Remove();
+            }
+        }
+
         // public methods
 
         public abstract void Remove();

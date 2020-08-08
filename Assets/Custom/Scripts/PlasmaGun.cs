@@ -7,10 +7,8 @@ namespace SpaceShooterDemo
     {
         public override void Fire()
         {
-            Debug.Log("fire");
             PlasmaBolt projectile = PlasmaBoltPool.Instance.Get();
 
-            projectile.gameObject.SetActive(true);
 
             projectile.transform.position = transform.position;
 
@@ -20,6 +18,8 @@ namespace SpaceShooterDemo
             projectile.Init(power, alignment,
                 new Vector2(direction.x, direction.y)
                 );
+
+            projectile.gameObject.SetActive(true);
 
             SetCooldownTimer(cooldownDuration);
         }

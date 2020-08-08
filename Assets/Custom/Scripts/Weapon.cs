@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace SpaceShooterDemo
 {
+    [RequireComponent(typeof(SpaceShip))]
     public abstract class Weapon : MonoBehaviour, IWeapon
     {
         // fields
@@ -11,7 +12,6 @@ namespace SpaceShooterDemo
 
         protected Movement mover;
 
-        [SerializeField]
         protected Team alignment = default;
 
         [SerializeField]
@@ -34,6 +34,8 @@ namespace SpaceShooterDemo
         protected virtual void Awake()
         {
             mover = GetComponentInParent<Movement>();
+            SpaceShip spaceShip = GetComponentInParent<SpaceShip>();
+            alignment = spaceShip.Alignment;
         }
 
         protected virtual void Update()

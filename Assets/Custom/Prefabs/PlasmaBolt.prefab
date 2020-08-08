@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5299310456822077627}
   - component: {fileID: 5299310456822077626}
   - component: {fileID: 3613108869514070459}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5299310457274179779}
   - component: {fileID: 5299310457274179776}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point Light 2D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,8 @@ GameObject:
   - component: {fileID: 5299310458398012526}
   - component: {fileID: 404260131844840129}
   - component: {fileID: 4396880182378349955}
-  m_Layer: 0
+  - component: {fileID: 5301025236370352020}
+  m_Layer: 10
   m_Name: PlasmaBolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,3 +251,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 902f8c43249e948ca9159a963ec3cdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &5301025236370352020
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5299310458398012529}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.02}
+  m_Size: {x: 0.08, y: 0.1}
+  m_Direction: 0
