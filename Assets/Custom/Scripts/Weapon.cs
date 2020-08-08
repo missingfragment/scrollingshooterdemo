@@ -73,7 +73,6 @@ namespace SpaceShooterDemo
 
             Projectile projectile = getProjectile();
 
-
             projectile.transform.position = transform.position;
             projectile.transform.rotation = transform.rotation;
 

@@ -81,6 +81,12 @@ namespace SpaceShooterDemo
                 };
 
             Destroyed?.Invoke(this, args);
+
+            Explosion explosion = ExplosionPool.Instance.Get();
+
+            explosion.transform.position = transform.position;
+            explosion.gameObject.SetActive(true);
+
             Remove();
         }
 

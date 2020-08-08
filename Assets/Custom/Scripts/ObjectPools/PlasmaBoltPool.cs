@@ -1,6 +1,4 @@
 ﻿namespace SpaceShooterDemo
 {
-    public class PlasmaBoltPool : ObjectPool<PlasmaBolt>
-    {
-    }
+    public class PlasmaBoltPool : ObjectPool<PlasmaBolt> { }
 }
