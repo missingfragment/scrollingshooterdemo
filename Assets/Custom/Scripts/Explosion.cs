@@ -6,10 +6,18 @@ namespace SpaceShooterDemo
 {
     public class Explosion : MonoBehaviour
     {
-        public IEnumerator Start()
+        public Coroutine coroutine;
+
+        public void OnEnable()
         {
-            yield return new WaitForSeconds(1);
-            Remove();
+            IEnumerator DestroyAfterSetTime()
+            {
+                yield return new WaitForSeconds(1);
+                Remove();
+            }
+
+            coroutine = StartCoroutine(DestroyAfterSetTime());
+            
         }
 
         public void Remove()
