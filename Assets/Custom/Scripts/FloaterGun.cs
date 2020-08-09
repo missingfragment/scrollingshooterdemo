@@ -1,4 +1,6 @@
-﻿namespace SpaceShooterDemo
+﻿using UnityEngine;
+
+namespace SpaceShooterDemo
 {
     public class FloaterGun : Weapon
     {
@@ -6,7 +8,25 @@
         {
             GetProjectileFromPool getProjectile = FloaterBulletPool.Instance.Get;
 
-            Fire(getProjectile);
+            PlayerShip player = PlayerShip.Instance;
+
+            Vector2 direction2d;
+
+            if (player != null)
+            {
+                Vector3 direction =  transform.position - player.transform.position;
+
+                direction.Normalize();
+
+                direction2d = new Vector2(direction.x, direction.y);
+            }
+            else
+            {
+                direction2d = Vector2.up;
+            }
+
+
+            Fire(getProjectile, direction2d);
         }
     }
 }

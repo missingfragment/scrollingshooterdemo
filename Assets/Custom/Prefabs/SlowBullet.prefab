@@ -120,8 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 921126737280404875}
-  maxSpeed: 5
-  accel: 5
+  maxSpeed: 2
+  accel: 2
   decel: 0
   keepInBounds: 0
 --- !u!70 &2147360080826995086

@@ -63,7 +63,8 @@ namespace SpaceShooterDemo
         // protected overload to be called in child implementations
         // Takes a delegate that supplies it with the proper function
         // for retrieving a projectile from its respective pool.
-        protected void Fire(GetProjectileFromPool getProjectile)
+        protected void Fire(GetProjectileFromPool getProjectile,
+            Vector2 direction)
         {
             if (getProjectile == null)
             {
@@ -77,7 +78,7 @@ namespace SpaceShooterDemo
 
             projectile.Mover.Velocity = mover.Velocity;
 
-            projectile.Init(power, alignment, Vector2.up);
+            projectile.Init(power, alignment, direction);
 
             projectile.gameObject.SetActive(true);
 

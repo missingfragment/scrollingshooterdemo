@@ -52,7 +52,7 @@ namespace SpaceShooterDemo
 
         // methods
 
-        protected void Start()
+        protected virtual void Start()
         {
             ShipHealthChangedEventArgs args =
                 new ShipHealthChangedEventArgs

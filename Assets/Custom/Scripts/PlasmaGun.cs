@@ -14,7 +14,7 @@ namespace SpaceShooterDemo
             // the projectile into every class.
             GetProjectileFromPool getProjectile = PlasmaBoltPool.Instance.Get;
 
-            Fire(getProjectile);
+            Fire(getProjectile, Vector2.up);
         }
     }
 }
