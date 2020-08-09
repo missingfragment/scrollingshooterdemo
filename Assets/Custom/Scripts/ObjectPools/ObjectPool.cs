@@ -45,7 +45,12 @@ public abstract class ObjectPool<T> : MonoBehaviour where T : Component
     {
         for(var i = 0; i < amount; i++)
         {
-            var newObject = Instantiate(prefab);
+            T newObject = (T) Instantiate(
+                prefab,
+                parent : transform,
+                instantiateInWorldSpace : true
+                );
+
             newObject.gameObject.SetActive(false);
             objects.Enqueue(newObject);
         }

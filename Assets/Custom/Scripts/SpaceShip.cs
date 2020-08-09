@@ -105,7 +105,7 @@ namespace SpaceShooterDemo
             Remove();
         }
 
-        protected virtual void Remove()
+        public virtual void Remove()
         {
             // TODO: replace with object pooling for enemies.
             Destroy(gameObject);
