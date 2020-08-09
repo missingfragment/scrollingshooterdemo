@@ -1,22 +1,31 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 namespace SpaceShooterDemo
 {
     public class Explosion : MonoBehaviour
     {
-        public Coroutine coroutine;
+        private const int LIGHT_INTENSITY = 4;
+
+        [SerializeField]
+        private Light2D explosionLight = default;
 
         public void OnEnable()
         {
+            explosionLight.intensity = LIGHT_INTENSITY;
             IEnumerator DestroyAfterSetTime()
             {
-                yield return new WaitForSeconds(1);
+                //yield return new WaitForSeconds(1);
+                while (explosionLight.intensity > 0)
+                {
+                    explosionLight.intensity -= 4f * Time.deltaTime;
+                    yield return null;
+                }
                 Remove();
             }
 
-            coroutine = StartCoroutine(DestroyAfterSetTime());
+            StartCoroutine(DestroyAfterSetTime());
             
         }
 

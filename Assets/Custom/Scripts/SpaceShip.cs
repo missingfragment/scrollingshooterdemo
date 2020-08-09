@@ -23,8 +23,8 @@ namespace SpaceShooterDemo
 
         // events
 
-        public event EventHandler<ShipDestroyedEventArgs> Destroyed;
-        public event EventHandler<ShipHealthChangedEventArgs> HealthChanged;
+        public static event EventHandler<ShipDestroyedEventArgs> Destroyed;
+        public static event EventHandler<ShipHealthChangedEventArgs> HealthChanged;
 
         // fields
         [SerializeField]
@@ -51,6 +51,19 @@ namespace SpaceShooterDemo
         }
 
         // methods
+
+        protected void Start()
+        {
+            ShipHealthChangedEventArgs args =
+                new ShipHealthChangedEventArgs
+                {
+                    OldHealthValue = 0,
+                    NewHealthValue = Health,
+                };
+
+            HealthChanged?.Invoke(this, args);
+        }
+
         public void TakeDamage(int amount)
         {
             ShipHealthChangedEventArgs args =
@@ -71,6 +84,8 @@ namespace SpaceShooterDemo
             }
         }
 
+        // When the ship gets destroyed.
+        // Can be called externally for instant death.
         public void Explode()
         {
             ShipDestroyedEventArgs args =
@@ -90,7 +105,7 @@ namespace SpaceShooterDemo
             Remove();
         }
 
-        private void Remove()
+        protected virtual void Remove()
         {
             // TODO: replace with object pooling for enemies.
             Destroy(gameObject);
