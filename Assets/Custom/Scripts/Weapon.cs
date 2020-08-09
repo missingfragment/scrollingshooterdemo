@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace SpaceShooterDemo
 {
-    [RequireComponent(typeof(SpaceShip))]
     public abstract class Weapon : MonoBehaviour, IWeapon
     {
         // delegates

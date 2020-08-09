@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: thruster_large
+  m_Name: thruster
   m_Shader: {fileID: -6465566751694194690, guid: 5c81efb0d85544c80b2210f4d8080d2e,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
@@ -21,13 +21,13 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Emission:
-        m_Texture: {fileID: 2800000, guid: 918221f83b4d14a8e9360a730e4b8519, type: 3}
+        m_Texture: {fileID: 2800000, guid: 22866a7b191684097af1e24a68b89fbf, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ec7d1e84b9a5b4de8900597afdd6d95f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6056a9fe9bc754454b446f927a26aaad, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_89211967: {r: 2.9960785, g: 0.59607846, b: 0.34509805, a: 0}
+    - Color_89211967: {r: 1.4980392, g: 0.36078432, b: 0.22745098, a: 0}
