@@ -25,7 +25,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 1
-  cooldownDuration: 1
+  cooldownDuration: 1.5
 --- !u!1001 &8209150965524502114
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53,6 +53,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BasicEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724038981984984266, guid: 55c6f3274d81c4acd811e67e83be22db,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 8724038981984984267, guid: 55c6f3274d81c4acd811e67e83be22db,
         type: 3}
@@ -117,12 +122,22 @@ PrefabInstance:
     - target: {fileID: 8724038981984984276, guid: 55c6f3274d81c4acd811e67e83be22db,
         type: 3}
       propertyPath: entryTime
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8724038981984984276, guid: 55c6f3274d81c4acd811e67e83be22db,
         type: 3}
       propertyPath: stationaryTime
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724038981984984276, guid: 55c6f3274d81c4acd811e67e83be22db,
+        type: 3}
+      propertyPath: activeTime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724038981984984277, guid: 55c6f3274d81c4acd811e67e83be22db,
+        type: 3}
+      propertyPath: maxHealth
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8724038981984984279, guid: 55c6f3274d81c4acd811e67e83be22db,
         type: 3}

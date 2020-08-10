@@ -239,6 +239,7 @@ MonoBehaviour:
   accel: 5
   decel: 0
   keepInBounds: 0
+  rotateWithMovement: 1
 --- !u!114 &4396880182378349955
 MonoBehaviour:
   m_ObjectHideFlags: 0

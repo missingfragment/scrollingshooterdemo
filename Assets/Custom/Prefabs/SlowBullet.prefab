@@ -124,6 +124,7 @@ MonoBehaviour:
   accel: 2
   decel: 0
   keepInBounds: 0
+  rotateWithMovement: 1
 --- !u!70 &2147360080826995086
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

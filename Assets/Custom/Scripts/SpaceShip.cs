@@ -115,9 +115,10 @@ namespace SpaceShooterDemo
         {
 
             GameObject other = collision.gameObject;
-            if (Alignment == Team.Player && other.layer == EnemyLayer)
+            if ((Alignment == Team.Player && other.layer == EnemyLayer)
+                || (Alignment == Team.Enemy && other.layer == PlayerLayer))
             {
-                Explode();
+                TakeDamage(1);
             }
         }
     }

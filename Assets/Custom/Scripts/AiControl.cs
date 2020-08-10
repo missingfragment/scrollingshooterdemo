@@ -7,18 +7,14 @@ namespace SpaceShooterDemo
     public class AiControl : ShipControl
     {
         [SerializeField]
-        private float entryTime = default;
+        protected float entryTime = default;
         [SerializeField]
-        private float stationaryTime = default;
-
-        protected void Start()
-        {
-            StartCoroutine(RunAi());
-        }
+        protected float activeTime = default;
 
         protected void OnEnable()
         {
             visibilityChecker.VisibilityChanged += OnVisibilityChanged;
+            StartCoroutine(RunAi());
         }
 
         protected void OnDisable()
@@ -48,7 +44,7 @@ namespace SpaceShooterDemo
             // Stop moving and start shooting
             mover.Inputs = Vector2.zero;
             firing = true;
-            yield return new WaitForSeconds(stationaryTime);
+            yield return new WaitForSeconds(activeTime);
 
             // Resume moving
             mover.Inputs = Vector2.up;

@@ -3,7 +3,7 @@
 namespace SpaceShooterDemo
 {
     [RequireComponent(typeof(Movement))]
-    [RequireComponent(typeof(ShipControl))]
+    [RequireComponent(typeof(SpaceShip))]
     public abstract class ShipControl : MonoBehaviour
     {
         protected Movement mover;

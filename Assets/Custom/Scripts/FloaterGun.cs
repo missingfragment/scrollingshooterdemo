@@ -14,7 +14,8 @@ namespace SpaceShooterDemo
 
             if (player != null)
             {
-                Vector3 direction =  transform.position - player.transform.position;
+                Vector3 direction =
+                    player.transform.position - transform.position;
 
                 direction.Normalize();
 

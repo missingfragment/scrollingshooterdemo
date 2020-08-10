@@ -16,6 +16,8 @@ namespace SpaceShooterDemo
         protected float decel;
         [SerializeField]
         protected bool keepInBounds;
+        [SerializeField]
+        protected bool rotateWithMovement;
 
         protected Camera mainCamera;
 
@@ -25,6 +27,12 @@ namespace SpaceShooterDemo
 
         public Vector2 Inputs { get; set; } = new Vector2(0, 0);
         public Vector2 Velocity { get; set; } = new Vector2(0, 0);
+
+        public bool RotateWithMovement
+        {
+            get => rotateWithMovement;
+            set => rotateWithMovement = value;
+        }
 
         void Start()
         {
@@ -39,13 +47,16 @@ namespace SpaceShooterDemo
 
         void FixedUpdate()
         {
-            if (Velocity.magnitude >= decel)
+            if (Inputs.magnitude <= 0.1f)
             {
-                Velocity -= Velocity.normalized * decel;
-            }
-            else
-            {
-                Velocity = Vector2.zero;
+                if (Velocity.magnitude >= decel)
+                {
+                    Velocity -= Velocity.normalized * decel;
+                }
+                else
+                {
+                    Velocity = Vector2.zero;
+                }
             }
 
             Velocity += Inputs * accel;
@@ -53,7 +64,18 @@ namespace SpaceShooterDemo
 
             Velocity = Vector2.ClampMagnitude(Velocity, maxSpeed);
 
-            transform.Translate(Velocity * Time.deltaTime);
+            Vector3 velocity3 = new Vector3(Velocity.x, Velocity.y, 0);
+
+            if (rotateWithMovement)
+            {
+                transform.position += velocity3 * Time.deltaTime;
+                transform.rotation =
+                    Quaternion.LookRotation(transform.forward, Vector3.up);
+            }
+            else
+            {
+                transform.Translate(Velocity * Time.deltaTime);
+            }
 
             if (!keepInBounds)
             {
