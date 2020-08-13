@@ -6,9 +6,9 @@ namespace SpaceShooterDemo
     {
         public static PlayerShip Instance { get; private set; }
 
-        protected override void Start()
+        protected override void Awake()
         {
-            base.Start();
+            base.Awake();
 
             if (Instance == null)
             {

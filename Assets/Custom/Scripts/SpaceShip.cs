@@ -13,7 +13,7 @@ namespace SpaceShooterDemo
         // events
 
         public static event EventHandler<ShipDestroyedEventArgs> Destroyed;
-        public static event EventHandler<ShipHealthChangedEventArgs> HealthChanged;
+        public event EventHandler<ShipHealthChangedEventArgs> HealthChanged;
 
         // fields
         [SerializeField]
@@ -59,13 +59,15 @@ namespace SpaceShooterDemo
                 damage = Mathf.Clamp(maxHealth - value, 0, maxHealth);
         }
 
+        public int MaxHealth => maxHealth;
+
         public int BumpDamage => bumpDamage;
 
         public bool Invincible { get; set; } = false;
 
         // methods
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             ShipHealthChangedEventArgs args =
                 new ShipHealthChangedEventArgs
