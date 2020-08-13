@@ -9,6 +9,7 @@ namespace SpaceShooterDemo
 {
     public class UiHealthBar : MonoBehaviour
     {
+        // fields
         [SerializeField]
         protected Image barImage;
 
@@ -29,6 +30,8 @@ namespace SpaceShooterDemo
 
         protected SpaceShip boundSpaceShip;
 
+        // properties
+
         public float BarFill
         {
             get => barValue / maxValue;
@@ -40,6 +43,8 @@ namespace SpaceShooterDemo
             get => barValue;
             set => barValue = Mathf.Clamp(value, 0f, maxValue);
         }
+
+        // methods
 
         private void UpdateBarFill()
         {

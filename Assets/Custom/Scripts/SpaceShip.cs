@@ -82,12 +82,21 @@ namespace SpaceShooterDemo
         private IEnumerator DamageFlash()
         {
             sprite.color = damageFlashColor;
-            yield return new WaitForSeconds(.2f);
-            while (sprite.color != Color.white)
+            //yield return new WaitForSeconds(.2f);
+            float progress = 0f;
+
+            float flashSpeed = 1.5f;
+
+            Color startColor = sprite.color;
+
+            while (progress < 1f)
             {
-                sprite.color = Color.Lerp(sprite.color, Color.white, 0.2f);
+                sprite.color = Color.Lerp(startColor, Color.white,
+                    progress);
+                progress += flashSpeed * Time.deltaTime;
                 yield return null;
             }
+            sprite.color = Color.white;
         }
 
         protected IEnumerator TemporaryInvincibility()
@@ -117,9 +126,9 @@ namespace SpaceShooterDemo
 
         // Causes the ship to take damage.
         // Destroys the ship if Health drops to 0 or below.
-        public void TakeDamage(int amount)
+        public virtual void TakeDamage(int amount)
         {
-            if (Invincible)
+            if ((Invincible && amount > 0) || amount == 0)
             {
                 return;
             }
@@ -134,11 +143,15 @@ namespace SpaceShooterDemo
 
             args.NewHealthValue = Health;
 
-            StartCoroutine(DamageFlash());
-
-            if (invincibilityDuration > 0f)
+            // If amount is less than zero, it is healing.
+            if (amount > 0)
             {
-                StartCoroutine(TemporaryInvincibility());
+                StartCoroutine(DamageFlash());
+
+                if (invincibilityDuration > 0f)
+                {
+                    StartCoroutine(TemporaryInvincibility());
+                }
             }
 
             HealthChanged?.Invoke(this, args);
@@ -187,7 +200,10 @@ namespace SpaceShooterDemo
                 if ((Alignment == Team.Player && other.gameObject.layer == EnemyLayer)
                     || (Alignment == Team.Enemy && other.gameObject.layer == PlayerLayer))
                 {
-                    TakeDamage(other.BumpDamage);
+                    if (!Invincible)
+                    {
+                        TakeDamage(other.BumpDamage);
+                    }
                 }
             }
         }

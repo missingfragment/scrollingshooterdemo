@@ -53,13 +53,19 @@ namespace SpaceShooterDemo
             }
             boundSpaceShip.HealthChanged -= OnSpaceShipHealthChanged;
             boundSpaceShip = null;
+            UpdateTextField(boundSpaceShip.MaxHealth);
+        }
+
+        private void UpdateTextField(int amount)
+        {
+            healthTextField.text = $"{HEALTH_PREFIX} {amount}";
         }
 
         private void OnSpaceShipHealthChanged(
             object sender,
             ShipHealthChangedEventArgs e)
         {
-            healthTextField.text = $"{HEALTH_PREFIX} {e.NewHealthValue}";
+            UpdateTextField(e.NewHealthValue);
         }
 
         private void OnSpaceShipDestroyed(

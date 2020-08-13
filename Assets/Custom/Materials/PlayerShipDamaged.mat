@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerShip
+  m_Name: PlayerShipDamaged
   m_Shader: {fileID: -6465566751694194690, guid: 5c81efb0d85544c80b2210f4d8080d2e,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
@@ -30,4 +30,4 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_89211967: {r: 0.5499135, g: 5.8969326, b: 10.598332, a: 0}
+    - Color_89211967: {r: 2.5414364, g: 0.25174606, b: 0.29969725, a: 0}
