@@ -65,12 +65,18 @@ namespace SpaceShooterDemo
             Velocity = Vector2.ClampMagnitude(Velocity, maxSpeed);
 
             Vector3 velocity3 = new Vector3(Velocity.x, Velocity.y, 0);
+            
 
             if (rotateWithMovement)
             {
                 transform.position += velocity3 * Time.deltaTime;
-                transform.rotation =
-                    Quaternion.LookRotation(transform.forward, Vector3.up);
+
+                float angle = Mathf.Atan2(Velocity.x, Velocity.y)
+                    * Mathf.Rad2Deg;
+
+                transform.rotation = Quaternion.identity;
+
+                transform.Rotate(0f, 0f, -angle);
             }
             else
             {

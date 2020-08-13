@@ -235,8 +235,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 5299310456822077627}
-  maxSpeed: 5
-  accel: 5
+  maxSpeed: 10
+  accel: 10
   decel: 0
   keepInBounds: 0
   rotateWithMovement: 1

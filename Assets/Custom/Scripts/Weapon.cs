@@ -76,7 +76,7 @@ namespace SpaceShooterDemo
             projectile.transform.position = transform.position;
             projectile.transform.rotation = transform.rotation;
 
-            projectile.Mover.Velocity = mover.Velocity;
+            //projectile.Mover.Velocity = mover.Velocity;
 
             projectile.Init(power, alignment, direction);
 

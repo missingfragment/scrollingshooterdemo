@@ -18,7 +18,7 @@ namespace SpaceShooterDemo
             yield return new WaitForSeconds(entryTime);
 
             // Begin firing
-            mover.Inputs = new Vector2(xDirection, -0.5f);
+            mover.Inputs = new Vector2(xDirection, -0.1f);
             firing = true;
             yield return new WaitForSeconds(activeTime);
 

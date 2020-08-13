@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 1
-  cooldownDuration: 0.1
+  cooldownDuration: 0.12
 --- !u!1 &695772419689369782
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 1
-  cooldownDuration: 0.1
+  cooldownDuration: 0.12
 --- !u!1 &4536394163773016651
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   power: 1
-  cooldownDuration: 0.1
+  cooldownDuration: 0.12
 --- !u!1 &4945498702180388808
 GameObject:
   m_ObjectHideFlags: 0
