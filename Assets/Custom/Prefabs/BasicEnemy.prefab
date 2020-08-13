@@ -137,8 +137,18 @@ PrefabInstance:
     - target: {fileID: 8724038981984984277, guid: 55c6f3274d81c4acd811e67e83be22db,
         type: 3}
       propertyPath: maxHealth
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8724038981984984277, guid: 55c6f3274d81c4acd811e67e83be22db,
+        type: 3}
+      propertyPath: bumpDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8724038981984984277, guid: 55c6f3274d81c4acd811e67e83be22db,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 648167001614859116}
     - target: {fileID: 8724038981984984279, guid: 55c6f3274d81c4acd811e67e83be22db,
         type: 3}
       propertyPath: maxSpeed
@@ -160,6 +170,12 @@ PrefabInstance:
 --- !u!1 &648167001614859118 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8724038980272041228, guid: 55c6f3274d81c4acd811e67e83be22db,
+    type: 3}
+  m_PrefabInstance: {fileID: 8209150965524502114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &648167001614859116 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8724038980272041230, guid: 55c6f3274d81c4acd811e67e83be22db,
     type: 3}
   m_PrefabInstance: {fileID: 8209150965524502114}
   m_PrefabAsset: {fileID: 0}

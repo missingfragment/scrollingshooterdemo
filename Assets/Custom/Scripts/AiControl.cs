@@ -29,7 +29,11 @@ namespace SpaceShooterDemo
                 return;
             }
 
-            if (!visible)
+            if (visible)
+            {
+                spaceShip.Invincible = false;
+            }
+            else
             {
                 spaceShip.Remove();
             }
@@ -38,6 +42,7 @@ namespace SpaceShooterDemo
         protected virtual IEnumerator RunAi()
         {
             // Enter the camera's view
+            spaceShip.Invincible = true;
             mover.Inputs = Vector2.up;
             yield return new WaitForSeconds(entryTime);
 

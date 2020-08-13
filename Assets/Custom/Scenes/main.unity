@@ -952,6 +952,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthTextField: {fileID: 2841312}
+--- !u!212 &2014048292 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 4945498703995139562, guid: 7be7d31bb65d944c19ed5b4da7a04d9a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4945498702211080954}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2049641621
 GameObject:
   m_ObjectHideFlags: 0
@@ -5723,6 +5729,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4898946206155057458, guid: 7be7d31bb65d944c19ed5b4da7a04d9a,
+        type: 3}
+      propertyPath: bumpDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4898946206155057458, guid: 7be7d31bb65d944c19ed5b4da7a04d9a,
+        type: 3}
+      propertyPath: sprite
+      value: 
+      objectReference: {fileID: 2014048292}
     - target: {fileID: 4945498702367733134, guid: 7be7d31bb65d944c19ed5b4da7a04d9a,
         type: 3}
       propertyPath: m_Name

@@ -66,9 +66,11 @@ namespace SpaceShooterDemo
             {
                 SpaceShip otherShip = other.GetComponent<SpaceShip>();
 
-                otherShip.TakeDamage(Power);
-
-                Remove();
+                if (!otherShip.Invincible)
+                {
+                    otherShip.TakeDamage(Power);
+                    Remove();
+                }
             }
         }
 

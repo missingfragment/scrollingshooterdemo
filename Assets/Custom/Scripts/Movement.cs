@@ -60,15 +60,13 @@ namespace SpaceShooterDemo
             }
 
             Velocity += Inputs * accel;
-        
-
+       
             Velocity = Vector2.ClampMagnitude(Velocity, maxSpeed);
-
-            Vector3 velocity3 = new Vector3(Velocity.x, Velocity.y, 0);
-            
 
             if (rotateWithMovement)
             {
+                Vector3 velocity3 = new Vector3(Velocity.x, Velocity.y, 0);
+
                 transform.position += velocity3 * Time.deltaTime;
 
                 float angle = Mathf.Atan2(Velocity.x, Velocity.y)
@@ -101,6 +99,9 @@ namespace SpaceShooterDemo
                 screenBounds.y - objectHeight
                 );
 
+            // If our position changed from moving back onscreen,
+            // that means we're up against the screen,
+            // so we should zero our velocity in that direction.
             if (transform.position.x != position.x)
             {
                 Velocity = new Vector2(0f, Velocity.y);
