@@ -16,11 +16,14 @@ namespace SpaceShooterDemo
         protected VisibilityChecker visibilityChecker;
         protected SpaceShip spaceShip;
 
+        protected AudioSource weaponSound;
+
         protected virtual void Awake()
         {
             mover = GetComponent<Movement>();
             spaceShip = GetComponent<SpaceShip>();
             visibilityChecker = GetComponentInChildren<VisibilityChecker>();
+            weaponSound = GetComponent<AudioSource>();
         }
 
         protected virtual void Update()
@@ -39,6 +42,10 @@ namespace SpaceShooterDemo
                 if (weapon.Enabled && weapon.ReadyToFire)
                 {
                     weapon.Fire();
+                    if (weaponSound != null)
+                    {
+                        weaponSound.PlayOneShot(weaponSound.clip, 1.0f);
+                    }
                 }
             }
         }
