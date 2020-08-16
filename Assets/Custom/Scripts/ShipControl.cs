@@ -10,20 +10,18 @@ namespace SpaceShooterDemo
 
         protected bool firing = false;
 
-        [SerializeField]
-        private Weapon[] weapons = default;
+        private WeaponGroup[] weaponGroups;
 
         protected VisibilityChecker visibilityChecker;
         protected SpaceShip spaceShip;
-
-        protected AudioSource weaponSound;
 
         protected virtual void Awake()
         {
             mover = GetComponent<Movement>();
             spaceShip = GetComponent<SpaceShip>();
             visibilityChecker = GetComponentInChildren<VisibilityChecker>();
-            weaponSound = GetComponent<AudioSource>();
+
+            weaponGroups = GetComponentsInChildren<WeaponGroup>();
         }
 
         protected virtual void Update()
@@ -36,17 +34,9 @@ namespace SpaceShooterDemo
 
         protected virtual void Fire()
         {
-            for (var i = 0; i < weapons.Length; i++)
+            for (var i = 0; i < weaponGroups.Length; i++)
             {
-                var weapon = weapons[i];
-                if (weapon.Enabled && weapon.ReadyToFire)
-                {
-                    weapon.Fire();
-                    if (weaponSound != null)
-                    {
-                        weaponSound.PlayOneShot(weaponSound.clip, 1.0f);
-                    }
-                }
+                weaponGroups[i].Fire();
             }
         }
     }

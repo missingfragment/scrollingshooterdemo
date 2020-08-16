@@ -31,6 +31,11 @@ namespace SpaceShooterDemo
 
         public override void TakeDamage(int amount)
         {
+            if (amount == 0)
+            {
+                return;
+            }
+
             if (Health <= 1)
             {
                 base.TakeDamage(amount);
@@ -38,6 +43,7 @@ namespace SpaceShooterDemo
                 {
                     StopCoroutine(hpRechargeCoroutine);
                 }
+                AudioManager.Instance.Stop("alarm");
             }
             else
             {
@@ -45,6 +51,8 @@ namespace SpaceShooterDemo
                 int newHp = Mathf.Clamp(Health - amount, 0, MaxHealth);
                 base.TakeDamage(Health - 1);
                 hpRechargeCoroutine = StartCoroutine(HpRecharge(newHp));
+                AudioManager.Instance.Play("damage");
+                AudioManager.Instance.Play("alarm");
             }
         }
 
@@ -58,6 +66,7 @@ namespace SpaceShooterDemo
             {
                 dangerSprite.gameObject.SetActive(false);
             }
+            AudioManager.Instance.Play("recover");
         }
     }
 

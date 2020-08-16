@@ -104,11 +104,11 @@ namespace SpaceShooterDemo
             // so we should zero our velocity in that direction.
             if (transform.position.x != position.x)
             {
-                Velocity = new Vector2(0f, Velocity.y);
+                Velocity = new Vector2(0f, Inputs.y * maxSpeed);
             }
             else if (transform.position.y != position.y)
             {
-                Velocity = new Vector2(Velocity.x, 0f);
+                Velocity = new Vector2(Inputs.x * maxSpeed, 0f);
             }
 
             transform.position = position;
