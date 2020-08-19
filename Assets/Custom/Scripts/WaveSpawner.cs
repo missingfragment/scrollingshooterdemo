@@ -10,18 +10,36 @@ namespace SpaceShooterDemo
     public class WaveSpawner : MonoBehaviour
     {
         [SerializeField]
-        protected GameObject[] wavePrefabs = default;
+        protected Wave[] waves = default;
         [SerializeField]
-        protected float waveDuration = 5f;
+        protected float preDelay = 3f;
 
         protected IEnumerator Start()
         {
-            for(var i = 0; i < wavePrefabs.Length; i++)
+            yield return new WaitForSeconds(preDelay);
+
+            for(var i = 0; i < waves.Length; i++)
             {
-                Instantiate(wavePrefabs[i], parent : transform,
-                    instantiateInWorldSpace : true);
-                yield return new WaitForSeconds(waveDuration);
+                for (var ii = 0; ii < waves[i].repetitions; ii++)
+                {
+                    Instantiate(waves[i].prefab, parent : transform,
+                        instantiateInWorldSpace : true);
+                    if (waves[i].repeatDelay > 0)
+                    {
+                        yield return new WaitForSeconds(waves[i].repeatDelay);
+                    }
+                }
+                yield return new WaitForSeconds(waves[i].duration);
             }
         }
+    }
+
+    [System.Serializable]
+    public struct Wave
+    {
+        public GameObject prefab;
+        public float duration;
+        public int repetitions;
+        public float repeatDelay;
     }
 }

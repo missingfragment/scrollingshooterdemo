@@ -1,17 +1,24 @@
 ﻿using UnityEngine;
 using System;
 
-public class VisibilityChecker : MonoBehaviour
+namespace SpaceShooterDemo
 {
-    public event Action<bool> VisibilityChanged;
-
-    private void OnBecameInvisible()
+    /// <summary>
+    /// Provides access to the OnBecameInvisible() and
+    /// OnBecameVisible() events to parents without graphic components.
+    /// </summary>
+    public class VisibilityChecker : MonoBehaviour
     {
-        VisibilityChanged?.Invoke(false);
-    }
+        public event Action<bool> VisibilityChanged;
 
-    private void OnBecameVisible()
-    {
-        VisibilityChanged?.Invoke(true);
+        private void OnBecameInvisible()
+        {
+            VisibilityChanged?.Invoke(false);
+        }
+
+        private void OnBecameVisible()
+        {
+            VisibilityChanged?.Invoke(true);
+        }
     }
 }

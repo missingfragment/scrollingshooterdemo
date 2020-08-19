@@ -784,14 +784,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7999b8a6b207d43a5a6863f747c84c0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wavePrefabs:
-  - {fileID: 6797278230689887726, guid: 1cff6ab744d4149488587f644cc5ad43, type: 3}
-  - {fileID: 1350739374255926323, guid: 96a534e62afcf4ce5bef4224bb848639, type: 3}
-  - {fileID: 6797278230689887726, guid: 1cff6ab744d4149488587f644cc5ad43, type: 3}
-  - {fileID: 1350739374255926323, guid: 96a534e62afcf4ce5bef4224bb848639, type: 3}
-  - {fileID: 6797278230689887726, guid: 1cff6ab744d4149488587f644cc5ad43, type: 3}
-  - {fileID: 1350739374255926323, guid: 96a534e62afcf4ce5bef4224bb848639, type: 3}
-  waveDuration: 5
+  waves:
+  - prefab: {fileID: 6797278230689887726, guid: 1cff6ab744d4149488587f644cc5ad43,
+      type: 3}
+    duration: 5
+    repetitions: 1
+    repeatDelay: 0
+  - prefab: {fileID: 1350739374255926323, guid: 96a534e62afcf4ce5bef4224bb848639,
+      type: 3}
+    duration: 5
+    repetitions: 2
+    repeatDelay: 2
+  - prefab: {fileID: 1350739374255926323, guid: 96a534e62afcf4ce5bef4224bb848639,
+      type: 3}
+    duration: 5
+    repetitions: 1
+    repeatDelay: 0
+  - prefab: {fileID: 6797278230689887726, guid: 1cff6ab744d4149488587f644cc5ad43,
+      type: 3}
+    duration: 5
+    repetitions: 1
+    repeatDelay: 0
+  - prefab: {fileID: 1350739374255926323, guid: 96a534e62afcf4ce5bef4224bb848639,
+      type: 3}
+    duration: 6
+    repetitions: 3
+    repeatDelay: 2
+  - prefab: {fileID: 6797278230689887726, guid: 1cff6ab744d4149488587f644cc5ad43,
+      type: 3}
+    duration: 5
+    repetitions: 1
+    repeatDelay: 0
+  - prefab: {fileID: 6797278230689887726, guid: 1cff6ab744d4149488587f644cc5ad43,
+      type: 3}
+    duration: 5
+    repetitions: 1
+    repeatDelay: 0
+  - prefab: {fileID: 6797278230689887726, guid: 1cff6ab744d4149488587f644cc5ad43,
+      type: 3}
+    duration: 5
+    repetitions: 1
+    repeatDelay: 0
+  - prefab: {fileID: 6797278230689887726, guid: 1cff6ab744d4149488587f644cc5ad43,
+      type: 3}
+    duration: 5
+    repetitions: 1
+    repeatDelay: 0
+  - prefab: {fileID: 6797278230689887726, guid: 1cff6ab744d4149488587f644cc5ad43,
+      type: 3}
+    duration: 5
+    repetitions: 1
+    repeatDelay: 0
+  preDelay: 3
 --- !u!4 &826455395
 Transform:
   m_ObjectHideFlags: 0
