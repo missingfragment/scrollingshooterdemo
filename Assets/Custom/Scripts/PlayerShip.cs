@@ -78,8 +78,8 @@ namespace SpaceShooterDemo
             if (Health > 1)
             {
                 dangerSprite.gameObject.SetActive(false);
+                AudioManager.Instance.Play("recover");
             }
-            AudioManager.Instance.Play("recover");
         }
     }
 

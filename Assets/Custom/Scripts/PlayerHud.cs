@@ -19,6 +19,8 @@ namespace SpaceShooterDemo
 
         private Coroutine coroutine;
 
+        private AnimatedValue<float> animatedScore = new AnimatedValue<float>();
+
         // methods
 
         // unity event methods
@@ -34,28 +36,14 @@ namespace SpaceShooterDemo
 
         // other methods
 
-        private IEnumerator AnimateScore(int startValue, int endValue,
-            float speed = SCORE_ANIM_SPEED)
-        {
-            float progress = 0f;
-
-            int score;
-
-            while (progress < 1f)
-            {
-                score = (int)Mathf.Lerp(startValue, endValue, progress);
-                progress += speed * Time.deltaTime;
-
-                UpdateScoreText(score);
-                yield return null;
-            }
-
-            UpdateScoreText(endValue);
-        }
-
         private void UpdateScoreText(int score)
         {
             scoreText.text = score.ToString("N0");
+        }
+
+        private void UpdateScoreText(float score)
+        {
+            UpdateScoreText((int)score);
         }
 
         private void OnScoreChanged(object sender, ScoreChangedEventArgs e)
@@ -65,7 +53,14 @@ namespace SpaceShooterDemo
                 StopCoroutine(coroutine);
             }
 
-            coroutine = StartCoroutine(AnimateScore(e.OldValue, e.NewValue));
+            //coroutine = StartCoroutine(AnimateScore(e.OldValue, e.NewValue));
+
+            coroutine = StartCoroutine(
+                animatedScore.Animate(
+                    (float)e.OldValue, (float)e.NewValue,
+                    Mathf.Lerp, UpdateScoreText
+                    )
+                );
         }
     }
 }

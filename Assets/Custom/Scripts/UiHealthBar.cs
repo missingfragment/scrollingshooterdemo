@@ -7,6 +7,10 @@ using System;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// Manages and animates a health bar graphic
+    /// in response to player HP changes.
+    /// </summary>
     public class UiHealthBar : MonoBehaviour
     {
         // fields
@@ -29,6 +33,9 @@ namespace SpaceShooterDemo
         protected float dangerThreshold = 0.1f;
 
         protected SpaceShip boundSpaceShip;
+
+        protected AnimatedValue<float> animatedValue;
+        private Coroutine coroutine;
 
         // properties
 
@@ -54,11 +61,18 @@ namespace SpaceShooterDemo
         private void Start()
         {
             Bind(PlayerShip.Instance);
+            animatedValue = new AnimatedValue<float>(barChangeSpeed);
         }
 
         private void OnDestroy()
         {
             Unbind();
+        }
+
+        private void SetBarValue(float amount)
+        {
+            BarValue = amount;
+            UpdateBarFill();
         }
 
         private void SetBarFill(float amount)
@@ -104,26 +118,19 @@ namespace SpaceShooterDemo
         private void OnShipHealthChanged(object sender,
             ShipHealthChangedEventArgs e)
         {
-            StartCoroutine(
-                GraduallyUpdateBarValue(
-                    e.OldHealthValue,
-                    e.NewHealthValue)
-                );
-        }
-
-        private IEnumerator GraduallyUpdateBarValue(float oldValue,
-            float newValue)
-        {
-            float progress = 0f;
-            while (progress < 1f)
+            if (coroutine != null)
             {
-                BarValue = Mathf.Lerp(oldValue, newValue, progress);
-                UpdateBarFill();
-                progress += barChangeSpeed * Time.deltaTime;
-                yield return null;
+                StopCoroutine(coroutine);
             }
-            BarValue = newValue;
-            UpdateBarFill();
+
+            coroutine = StartCoroutine(
+                animatedValue.Animate(
+                    e.OldHealthValue,
+                    e.NewHealthValue,
+                    Mathf.Lerp,
+                    SetBarValue
+                    )
+                );
         }
     }
 }
