@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 915771d3882a347d4ad446e8b5d43330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 5591099472814421798}
   entryTime: 1
   activeTime: 2
   enterFromLeft: 1
@@ -99,6 +97,11 @@ PrefabInstance:
       propertyPath: decel
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 648167002049120951, guid: 755666bd36b90488182c14c86366a76f,
+        type: 3}
+      propertyPath: scoreValue
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 2922203914038026698, guid: 755666bd36b90488182c14c86366a76f,
         type: 3}
       propertyPath: cooldownDuration
@@ -113,15 +116,3 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7285227305922991852}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5591099472814421798 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2922203914038026698, guid: 755666bd36b90488182c14c86366a76f,
-    type: 3}
-  m_PrefabInstance: {fileID: 7285227305922991852}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a26a37bf59c7b42ccaece800f9e433c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

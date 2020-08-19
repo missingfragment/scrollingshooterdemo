@@ -1,81 +1,59 @@
 ﻿using UnityEngine;
 using TMPro;
+using System.Collections;
 
 namespace SpaceShooterDemo
 {
     public class PlayerHud : MonoBehaviour
     {
-        private const string HEALTH_PREFIX = "Health: ";
-        private const string SHIP_DESTROYED = "SHIP DESTROYED";
-
+        private const int SCORE_ANIM_SPEED = 2;
         [SerializeField]
-        protected TMP_Text healthTextField = default;
+        protected TMP_Text scoreText = default;
 
-        protected SpaceShip boundSpaceShip;
+        private Coroutine coroutine;
 
-        protected void OnEnable()
+        private void OnEnable()
         {
-            SpaceShip.Destroyed += OnSpaceShipDestroyed;
+            GameManager.ScoreChanged += OnScoreChanged;
         }
 
-        protected void OnDisable()
+        private void OnDisable()
         {
-            SpaceShip.Destroyed -= OnSpaceShipDestroyed;
+            GameManager.ScoreChanged -= OnScoreChanged;
         }
 
-        protected void Start()
+        private IEnumerator AnimateScore(int startValue, int endValue,
+            float speed = SCORE_ANIM_SPEED)
         {
-            Bind(PlayerShip.Instance);
-        }
+            float progress = 0f;
 
-        public void Bind(SpaceShip target)
-        {
-            if (target == null)
+            int score;
+
+            while (progress < 1f)
             {
-                return;
+                score = (int)Mathf.Lerp(startValue, endValue, progress);
+                progress += speed * Time.deltaTime;
+
+                UpdateScoreText(score);
+                yield return null;
             }
 
-            if (boundSpaceShip != null)
+            UpdateScoreText(endValue);
+        }
+
+        private void UpdateScoreText(int score)
+        {
+            scoreText.text = score.ToString("N0");
+        }
+
+        private void OnScoreChanged(object sender, ScoreChangedEventArgs e)
+        {
+            if (coroutine != null)
             {
-                Unbind();
+                StopCoroutine(coroutine);
             }
 
-            boundSpaceShip = target;
-            boundSpaceShip.HealthChanged += OnSpaceShipHealthChanged;
-
-        }
-
-        public void Unbind()
-        {
-            if (boundSpaceShip == null)
-            {
-                return;
-            }
-            boundSpaceShip.HealthChanged -= OnSpaceShipHealthChanged;
-            boundSpaceShip = null;
-            UpdateTextField(boundSpaceShip.MaxHealth);
-        }
-
-        private void UpdateTextField(int amount)
-        {
-            healthTextField.text = $"{HEALTH_PREFIX} {amount}";
-        }
-
-        private void OnSpaceShipHealthChanged(
-            object sender,
-            ShipHealthChangedEventArgs e)
-        {
-            UpdateTextField(e.NewHealthValue);
-        }
-
-        private void OnSpaceShipDestroyed(
-            object sender,
-            ShipDestroyedEventArgs e)
-        {
-            if (sender is PlayerShip)
-            {
-                healthTextField.text = $"{SHIP_DESTROYED}";
-            }
+            coroutine = StartCoroutine(AnimateScore(e.OldValue, e.NewValue));
         }
     }
 }
