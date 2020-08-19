@@ -4,14 +4,24 @@ using System.Collections;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// A class responsible for updating HUD-related UI elements
+    /// in response to changes in the game state.
+    /// </summary>
     public class PlayerHud : MonoBehaviour
     {
+        // constants
         private const int SCORE_ANIM_SPEED = 2;
+
+        // fields
         [SerializeField]
         protected TMP_Text scoreText = default;
 
         private Coroutine coroutine;
 
+        // methods
+
+        // unity event methods
         private void OnEnable()
         {
             GameManager.ScoreChanged += OnScoreChanged;
@@ -21,6 +31,8 @@ namespace SpaceShooterDemo
         {
             GameManager.ScoreChanged -= OnScoreChanged;
         }
+
+        // other methods
 
         private IEnumerator AnimateScore(int startValue, int endValue,
             float speed = SCORE_ANIM_SPEED)

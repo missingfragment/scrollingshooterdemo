@@ -4,6 +4,10 @@ using System.Collections;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// A class responsible for tracking a ship's health
+    /// and triggering events when its HP changes or when it gets destroyed.
+    /// </summary>
     public class SpaceShip : MonoBehaviour
     {
         // constants
@@ -12,7 +16,14 @@ namespace SpaceShooterDemo
 
         // events
 
+        /// <summary>
+        /// Whenever any SpaceShip gets destroyed.  Reports a score value.
+        /// </summary>
         public static event EventHandler<ShipDestroyedEventArgs> Destroyed;
+        /// <summary>
+        /// Whenever this SpaceShip has its Health value changed.
+        /// Reports the previous and new current value.
+        /// </summary>
         public event EventHandler<ShipHealthChangedEventArgs> HealthChanged;
 
         // fields
@@ -48,9 +59,11 @@ namespace SpaceShooterDemo
 
         // properties
 
-        // Automatically keep HP clamped.
-        // Current Health is calculated by taking maxHealth
-        // and subtracting damage to find the current HP value.
+        /// <summary>
+        /// Automatically keeps HP clamped.
+        /// Current Health is calculated by taking maxHealth
+        /// and subtracting damage to find the current HP value.
+        /// </summary>
         public int Health
         {
             get =>
@@ -123,9 +136,14 @@ namespace SpaceShooterDemo
             shieldSprite.gameObject.SetActive(false);
             Invincible = false;
         }
-
-        // Causes the ship to take damage.
-        // Destroys the ship if Health drops to 0 or below.
+        /// <summary>
+        /// Causes the ship to take damage.
+        /// Destroys the ship if Health drops to 0 or below.
+        /// </summary>
+        /// <param name="amount">
+        /// How much damage to take.
+        /// Negative values are valid and function as healing.
+        /// </param>
         public virtual void TakeDamage(int amount)
         {
             if ((Invincible && amount > 0) || amount == 0)
@@ -162,8 +180,10 @@ namespace SpaceShooterDemo
             }
         }
 
-        // Destroys the ship.
-        // Can be called externally for instant death.
+        /// <summary>
+        /// Destroys the ship.
+        /// Can be called externally for instant death.
+        /// </summary>
         public void Explode()
         {
             ShipDestroyedEventArgs args =
@@ -183,14 +203,19 @@ namespace SpaceShooterDemo
             Remove();
         }
 
-        // Removes the ship from play.
-        // Does not create any effects.
+        /// <summary>
+        /// Removes the ship from play.
+        /// Does not create any effects.
+        /// </summary>
         public virtual void Remove()
         {
             // TODO: replace with object pooling for enemies.
             Destroy(gameObject);
         }
 
+        /// <summary>
+        /// When this SpaceShip collides with another SpaceShip.
+        /// </summary>
         private void OnTriggerEnter2D(Collider2D collision)
         {
             SpaceShip other = collision.gameObject.GetComponent<SpaceShip>();

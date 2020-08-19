@@ -3,8 +3,14 @@ using System;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// A Weapon that shoots PlasmaBolt Projectiles.
+    /// </summary>
     public class PlasmaGun : Weapon
     {
+        /// <summary>
+        /// Fires a PlasmaBolt.
+        /// </summary>
         public override void Fire()
         {
             GetProjectileFromPool getProjectile = PlasmaBoltPool.Instance.Get;

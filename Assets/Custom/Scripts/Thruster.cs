@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// Manages thruster graphics.
+    /// </summary>
     [RequireComponent(typeof(Movement))]
     public class Thruster : MonoBehaviour
     {

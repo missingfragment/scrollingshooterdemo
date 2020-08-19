@@ -5,9 +5,15 @@ using UnityEngine;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// Manages the game state and holds meta values like the Score.
+    /// </summary>
     public class GameManager : MonoBehaviour
     {
         // events
+        /// <summary>
+        /// Whenever the Score changes.
+        /// </summary>
         public static event EventHandler<ScoreChangedEventArgs> ScoreChanged;
 
         // fields

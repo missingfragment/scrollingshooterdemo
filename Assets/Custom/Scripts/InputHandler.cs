@@ -2,12 +2,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Relays c# events from the InputSystem to other classes.
+/// </summary>
 [RequireComponent(typeof(PlayerInput))]
 public class InputHandler : MonoBehaviour
 {
     // events
-    public static event Action<InputAction.CallbackContext> MoveEvent;
-    public static event Action<InputAction.CallbackContext> FireEvent;
+    public static event Action<InputAction.CallbackContext> InputReceived;
 
     // properties
     public static InputHandler Instance { get; private set; }
@@ -30,15 +32,12 @@ public class InputHandler : MonoBehaviour
 
     protected void OnEnable()
     {
-        var moveAction = PlayerInput.actions["Move"];
-        moveAction.started += OnMove;
-        moveAction.performed += OnMove;
-        moveAction.canceled += OnMove;
-
-        var fireAction = PlayerInput.actions["Fire"];
-        fireAction.started += OnFire;
-        fireAction.performed += OnFire;
-        fireAction.canceled += OnFire;
+        foreach(InputAction action in PlayerInput.actions)
+        {
+            action.started += OnInput;
+            action.performed += OnInput;
+            action.canceled += OnInput;
+        }
     }
 
     protected void OnDisable()
@@ -48,24 +47,16 @@ public class InputHandler : MonoBehaviour
             return;
         }
 
-        var moveAction = PlayerInput.actions["Move"];
-        moveAction.started -= OnMove;
-        moveAction.performed -= OnMove;
-        moveAction.canceled -= OnMove;
-
-        var fireAction = PlayerInput.actions["Fire"];
-        fireAction.started -= OnFire;
-        fireAction.performed -= OnFire;
-        fireAction.canceled -= OnFire;
+        foreach (InputAction action in PlayerInput.actions)
+        {
+            action.started -= OnInput;
+            action.performed -= OnInput;
+            action.canceled -= OnInput;
+        }
     }
 
-    private static void OnMove(InputAction.CallbackContext context)
+    private static void OnInput(InputAction.CallbackContext context)
     {
-        MoveEvent?.Invoke(context);
-    }
-
-    private static void OnFire(InputAction.CallbackContext context)
-    {
-        FireEvent?.Invoke(context);
+        InputReceived?.Invoke(context);
     }
 }

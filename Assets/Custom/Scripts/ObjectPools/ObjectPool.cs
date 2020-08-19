@@ -1,8 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using SpaceShooterDemo;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Caches discarded GameObjects in memory and provides a way to reuse them.
+/// </summary>
+/// <typeparam name="T">
+/// The Type of the object that this pool stores.
+/// </typeparam>
 public abstract class ObjectPool<T> : MonoBehaviour where T : Component
 {
     // fields

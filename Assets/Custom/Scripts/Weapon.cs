@@ -4,12 +4,19 @@ using UnityEngine;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// A Weapon is responsible for shooting Projectiles.
+    /// Implements the IWeapon interface.
+    /// </summary>
     public abstract class Weapon : MonoBehaviour, IWeapon
     {
         // delegates
 
-        // A delegate that stores a function for retrieving
-        // a Projectile from an ObjectPool.
+        /// <summary>
+        /// A delegate that stores a function for retrieving
+        /// a Projectile from an ObjectPool.
+        /// </summary>
+        /// <returns></returns>
         protected delegate Projectile GetProjectileFromPool();
 
         // fields
@@ -62,12 +69,24 @@ namespace SpaceShooterDemo
             cooldownTimer = value;
         }
 
-        // public overload from IWweapon, to be implemented by children classes
+        /// <summary>
+        /// A public overload from IWeapon,
+        /// to be implemented by child classes
+        /// </summary>
         public abstract void Fire();
 
-        // protected overload to be called in child implementations
-        // Takes a delegate that supplies it with the proper function
-        // for retrieving a projectile from its respective pool.
+        /// <summary>
+        /// Fires a projectile.
+        /// This overload gives child classes a base implementation
+        /// to use when implementing the public void Fire() method.
+        /// </summary>
+        /// <param name="getProjectile">
+        /// A delegate that represents the proper function
+        /// for retrieving a projectile from its respective pool.
+        /// </param>
+        /// <param name="direction">
+        /// The Vector2 direction that the Projectile will fire.
+        /// </param>
         protected void Fire(GetProjectileFromPool getProjectile,
             Vector2 direction)
         {

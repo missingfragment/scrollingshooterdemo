@@ -4,6 +4,9 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// An explosion effect that uses pooling and adjusts its Light2D.
+    /// </summary>
     public class Explosion : MonoBehaviour
     {
         private const int LIGHT_INTENSITY = 4;

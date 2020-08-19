@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// A class for holding references to Weapon objects
+    /// and coordinating them to fire at the same time
+    /// and with a single sound effect.
+    /// </summary>
     [RequireComponent(typeof(AudioSource))]
     public class WeaponGroup : MonoBehaviour
     {
@@ -18,6 +23,10 @@ namespace SpaceShooterDemo
             weapons = GetComponentsInChildren<Weapon>();
         }
 
+        /// <summary>
+        /// Fires all of the weapons in this WeaponGroup.
+        /// Waits for all weapons in the group to be ReadyToFire.
+        /// </summary>
         public void Fire()
         {
             bool readyToFire = true;

@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// Provides functionality for moving a GameObject.
+    /// </summary>
     public class Movement : MonoBehaviour
     {
         [SerializeField]

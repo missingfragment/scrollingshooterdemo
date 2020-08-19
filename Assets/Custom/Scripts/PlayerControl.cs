@@ -6,18 +6,32 @@ using UnityEngine.InputSystem;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// Provides the player an interface to control a PlayerShip.
+    /// </summary>
     public class PlayerControl : ShipControl
     {
         protected void OnEnable()
         {
-            InputHandler.MoveEvent += OnMoveInput;
-            InputHandler.FireEvent += OnFireInput;
+            InputHandler.InputReceived += OnInput;
         }
 
         protected void OnDisable()
         {
-            InputHandler.MoveEvent -= OnMoveInput;
-            InputHandler.FireEvent -= OnFireInput;
+            InputHandler.InputReceived -= OnInput;
+        }
+
+        private void OnInput(InputAction.CallbackContext context)
+        {
+            switch(context.action.name)
+            {
+                case "Fire":
+                    OnFireInput(context);
+                    break;
+                case "Move":
+                    OnMoveInput(context);
+                    break;
+            }
         }
 
         private void OnMoveInput(InputAction.CallbackContext context)

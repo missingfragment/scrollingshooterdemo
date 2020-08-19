@@ -3,6 +3,10 @@ using System;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// Represents a projectile that can collide with and do damage
+    /// to SpaceShips.
+    /// </summary>
     [RequireComponent(typeof(Movement))]
     public abstract class Projectile : MonoBehaviour
     {
@@ -76,6 +80,10 @@ namespace SpaceShooterDemo
 
         // public methods
 
+        /// <summary>
+        /// Removes the projectile from play and returns it
+        /// to its respective object pool.
+        /// </summary>
         public abstract void Remove();
 
         public void Init(int power, Team alignment, Vector2 direction)

@@ -2,20 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaveSpawner : MonoBehaviour
+namespace SpaceShooterDemo
 {
-    [SerializeField]
-    protected GameObject[] wavePrefabs = default;
-    [SerializeField]
-    protected float waveDuration = 5f;
-
-    protected IEnumerator Start()
+    /// <summary>
+    /// Spawns waves of enemies at set intervals.
+    /// </summary>
+    public class WaveSpawner : MonoBehaviour
     {
-        for(var i = 0; i < wavePrefabs.Length; i++)
+        [SerializeField]
+        protected GameObject[] wavePrefabs = default;
+        [SerializeField]
+        protected float waveDuration = 5f;
+
+        protected IEnumerator Start()
         {
-            Instantiate(wavePrefabs[i], parent : transform,
-                instantiateInWorldSpace : true);
-            yield return new WaitForSeconds(waveDuration);
+            for(var i = 0; i < wavePrefabs.Length; i++)
+            {
+                Instantiate(wavePrefabs[i], parent : transform,
+                    instantiateInWorldSpace : true);
+                yield return new WaitForSeconds(waveDuration);
+            }
         }
     }
 }

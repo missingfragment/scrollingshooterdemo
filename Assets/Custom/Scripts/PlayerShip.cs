@@ -3,6 +3,9 @@ using System.Collections;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// A SpaceShip that is controlled by the player.
+    /// </summary>
     public class PlayerShip : SpaceShip
     {
         [SerializeField]
@@ -56,6 +59,16 @@ namespace SpaceShooterDemo
             }
         }
 
+        /// <summary>
+        /// A coroutine that drops the PlayerShip's HP to 1
+        /// and then refills it after a set duration.
+        /// </summary>
+        /// <param name="finalHpAmount">
+        /// The HP value to restore the ship to after the duration.
+        /// </param>
+        /// <returns>
+        /// A Coroutine.
+        /// </returns>
         private IEnumerator HpRecharge(int finalHpAmount)
         {
             dangerSprite.gameObject.SetActive(true);
