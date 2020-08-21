@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using TMPro;
-using System.Collections;
 
 namespace SpaceShooterDemo
 {
@@ -17,9 +16,13 @@ namespace SpaceShooterDemo
         [SerializeField]
         protected TMP_Text scoreText = default;
 
+        [SerializeField]
+        protected TMP_Text livesText = default;
+
         private Coroutine coroutine;
 
-        private AnimatedValue<float> animatedScore = new AnimatedValue<float>();
+        private readonly AnimatedValue<float> animatedScore =
+            new AnimatedValue<float>(SCORE_ANIM_SPEED);
 
         // methods
 
@@ -27,14 +30,22 @@ namespace SpaceShooterDemo
         private void OnEnable()
         {
             GameManager.ScoreChanged += OnScoreChanged;
+            GameManager.LivesChanged += OnLivesChanged;
         }
+
 
         private void OnDisable()
         {
             GameManager.ScoreChanged -= OnScoreChanged;
+            GameManager.LivesChanged -= OnLivesChanged;
         }
 
         // other methods
+
+        private void OnLivesChanged(byte lives)
+        {
+            livesText.text = $"x{lives}";
+        }
 
         private void UpdateScoreText(int score)
         {

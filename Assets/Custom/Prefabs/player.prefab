@@ -5339,6 +5339,7 @@ MonoBehaviour:
   damageFlashColor: {r: 1, g: 0, b: 0, a: 1}
   invincibilityDuration: 1
   hpRechargeDuration: 2
+  respawnInvincibilityDuration: 2
   dangerSprite: {fileID: 4895631004230531014}
 --- !u!1 &4945498703037031381
 GameObject:

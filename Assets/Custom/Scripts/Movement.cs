@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace SpaceShooterDemo
 {
@@ -37,7 +35,7 @@ namespace SpaceShooterDemo
             set => rotateWithMovement = value;
         }
 
-        void Start()
+        private void Start()
         {
             mainCamera = Camera.main;
             screenBounds = mainCamera.ScreenToWorldPoint(
@@ -48,7 +46,13 @@ namespace SpaceShooterDemo
             objectHeight = sprite.bounds.extents.y;
         }
 
-        void FixedUpdate()
+        private void OnDisable()
+        {
+            Inputs = Vector2.zero;
+            Velocity = Vector2.zero;
+        }
+
+        private void FixedUpdate()
         {
             if (Inputs.magnitude <= 0.1f)
             {

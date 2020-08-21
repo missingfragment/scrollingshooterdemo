@@ -11,8 +11,8 @@ namespace SpaceShooterDemo
     public class SpaceShip : MonoBehaviour
     {
         // constants
-        protected const int PlayerLayer = 8;
-        protected const int EnemyLayer = 9;
+        protected const int PLAYER_LAYER = 8;
+        protected const int ENEMY_LAYER = 9;
 
         // events
 
@@ -112,10 +112,20 @@ namespace SpaceShooterDemo
             sprite.color = Color.white;
         }
 
-        protected IEnumerator TemporaryInvincibility()
+        protected IEnumerator TemporaryInvincibility(float? duration = null)
         {
             Invincible = true;
-            var timer = invincibilityDuration;
+            float timer;
+
+            // null check
+            if (duration is float dur)
+            {
+                timer = dur;
+            }
+            else
+            {
+                timer = invincibilityDuration;
+            }    
 
             shieldSprite.gameObject.SetActive(true);
 
@@ -151,15 +161,7 @@ namespace SpaceShooterDemo
                 return;
             }
 
-            ShipHealthChangedEventArgs args =
-                new ShipHealthChangedEventArgs
-                {
-                    OldHealthValue = Health
-                };
-
-            Health -= amount;
-
-            args.NewHealthValue = Health;
+            AddHealth(-amount);
 
             // If amount is less than zero, it is healing.
             if (amount > 0)
@@ -172,7 +174,6 @@ namespace SpaceShooterDemo
                 }
             }
 
-            HealthChanged?.Invoke(this, args);
 
             if (Health <= 0)
             {
@@ -180,11 +181,26 @@ namespace SpaceShooterDemo
             }
         }
 
+        protected void AddHealth(int amount)
+        {
+            ShipHealthChangedEventArgs args =
+                new ShipHealthChangedEventArgs
+                {
+                    OldHealthValue = Health
+                };
+
+            Health += amount;
+
+            args.NewHealthValue = Health;
+
+            HealthChanged?.Invoke(this, args);
+        }
+
         /// <summary>
         /// Destroys the ship.
         /// Can be called externally for instant death.
         /// </summary>
-        public void Explode()
+        public virtual void Explode()
         {
             ShipDestroyedEventArgs args =
                 new ShipDestroyedEventArgs
@@ -222,8 +238,8 @@ namespace SpaceShooterDemo
 
             if (other != null)
             {
-                if ((Alignment == Team.Player && other.gameObject.layer == EnemyLayer)
-                    || (Alignment == Team.Enemy && other.gameObject.layer == PlayerLayer))
+                if ((Alignment == Team.Player && other.gameObject.layer == ENEMY_LAYER)
+                    || (Alignment == Team.Enemy && other.gameObject.layer == PLAYER_LAYER))
                 {
                     if (!Invincible)
                     {

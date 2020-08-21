@@ -12,6 +12,9 @@ namespace SpaceShooterDemo
         protected float hpRechargeDuration = 2f;
 
         [SerializeField]
+        protected float respawnInvincibilityDuration = default;
+
+        [SerializeField]
         protected SpriteRenderer dangerSprite = default;
 
         public static PlayerShip Instance { get; private set; }
@@ -30,6 +33,29 @@ namespace SpaceShooterDemo
             {
                 Destroy(gameObject);
             }
+        }
+
+        public override void Remove()
+        {
+            gameObject.SetActive(false);
+            dangerSprite.gameObject.SetActive(false);
+            sprite.color = Color.white;
+            transform.position = new Vector3(-100, -100, -100);
+        }
+
+        public void Respawn()
+        {
+            gameObject.SetActive(true);
+
+            Health = 0;
+            AddHealth(maxHealth);
+
+            transform.position = new Vector3(0, -1);
+            StartCoroutine(
+                TemporaryInvincibility(respawnInvincibilityDuration)
+                );
+
+            AudioManager.Instance.Play("recover");
         }
 
         public override void TakeDamage(int amount)

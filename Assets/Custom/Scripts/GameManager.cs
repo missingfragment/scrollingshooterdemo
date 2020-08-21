@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SpaceShooterDemo
@@ -11,50 +10,101 @@ namespace SpaceShooterDemo
     public class GameManager : MonoBehaviour
     {
         // events
+
         /// <summary>
         /// Whenever the Score changes.
         /// </summary>
         public static event EventHandler<ScoreChangedEventArgs> ScoreChanged;
 
+        /// <summary>
+        /// Whenever Lives changes.
+        /// </summary>
+        public static event Action<byte> LivesChanged;
+
+        // constants
+        private const int EXTRA_LIFE_BASE_THRESHOLD = 100000;
+        private const float RESPAWN_DELAY = 1f;
+
         // fields
-        private int _score;
+        private static int score;
+        private static byte lives;
+
+        private int extraLifeThreshold = EXTRA_LIFE_BASE_THRESHOLD;
 
         // properties
-        public int Score
+        public static int Score
         {
-            get => _score;
+            get => score;
             set
             {
                 var eventArgs = new ScoreChangedEventArgs
                 {
-                    OldValue = _score,
+                    OldValue = score,
                     NewValue = value
                 };
 
-                _score = value;
-                ScoreChanged?.Invoke(this, eventArgs);
+                score = value;
+                ScoreChanged?.Invoke(null, eventArgs);
+            }
+        }
+
+        public static byte Lives
+        {
+            get => lives;
+            set
+            {
+                lives = value;
+                LivesChanged?.Invoke(lives);
             }
         }
 
         private void Start()
         {
             Score = 0;
+            Lives = 3;
         }
 
         private void OnEnable()
         {
             SpaceShip.Destroyed += OnShipDestroyed;
+            ScoreChanged += OnScoreChanged;
         }
 
         private void OnDisable()
         {
             SpaceShip.Destroyed -= OnShipDestroyed;
+            ScoreChanged -= OnScoreChanged;
+        }
+
+        private void OnScoreChanged(object sender, ScoreChangedEventArgs e)
+        {
+            if (e.NewValue >= extraLifeThreshold)
+            {
+                extraLifeThreshold += EXTRA_LIFE_BASE_THRESHOLD;
+                if (Lives < 100)
+                {
+                    Lives++;
+                    AudioManager.Instance.Play("1up");
+                }
+            }
+        }
+
+        private IEnumerator RespawnPlayer()
+        {
+            yield return new WaitForSeconds(RESPAWN_DELAY);
+
+            PlayerShip.Instance.Respawn();
         }
 
         private void OnShipDestroyed(object sender, ShipDestroyedEventArgs e)
         {
             if (sender is PlayerShip)
             {
+                if (Lives > 0)
+                {
+                    Lives--;
+                    StartCoroutine(RespawnPlayer());
+                }
                 return;
             }
 

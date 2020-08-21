@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// A coroutine that lerps a value from point A to point B
+/// A class for providing a generic coroutine
+/// that lerps a value from point A to point B
 /// using a LerpValue delegate,
 /// then runs an ApplyValue delegate on the result.
 /// </summary>

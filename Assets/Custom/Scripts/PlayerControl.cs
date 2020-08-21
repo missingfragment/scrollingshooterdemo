@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace SpaceShooterDemo
@@ -19,6 +16,8 @@ namespace SpaceShooterDemo
         protected void OnDisable()
         {
             InputHandler.InputReceived -= OnInput;
+
+            firing = false;
         }
 
         private void OnInput(InputAction.CallbackContext context)
