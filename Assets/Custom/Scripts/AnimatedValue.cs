@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -60,7 +59,7 @@ public class AnimatedValue<T>
     {
         float progress = 0f;
 
-        T value = startValue;
+        T value;
 
         while (progress < 1f)
         {
