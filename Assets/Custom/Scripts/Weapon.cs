@@ -31,9 +31,6 @@ namespace SpaceShooterDemo
         [SerializeField]
         protected float cooldownDuration = default;
 
-        [SerializeField]
-        protected string soundEffectId = default;
-
         // properties
         public Transform Transform => transform;
 
@@ -42,8 +39,6 @@ namespace SpaceShooterDemo
         public bool ReadyToFire => cooldownTimer <= 0f;
 
         public Team Alignment => alignment;
-
-        public string SoundEffectId => soundEffectId;
 
         // methods
 

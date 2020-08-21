@@ -796,17 +796,17 @@ MonoBehaviour:
     duration: 5
     repetitions: 1
     repeatDelay: 0
+  - prefab: {fileID: 2629267104899367563, guid: 2388d25ce7b924edb8265df214bab9b6,
+      type: 3}
+    duration: 7
+    repetitions: 1
+    repeatDelay: 0
   - prefab: {fileID: 1350739374255926323, guid: 96a534e62afcf4ce5bef4224bb848639,
       type: 3}
     duration: 5
     repetitions: 2
     repeatDelay: 2
-  - prefab: {fileID: 1350739374255926323, guid: 96a534e62afcf4ce5bef4224bb848639,
-      type: 3}
-    duration: 5
-    repetitions: 1
-    repeatDelay: 0
-  - prefab: {fileID: 6797278230689887726, guid: 1cff6ab744d4149488587f644cc5ad43,
+  - prefab: {fileID: 8196416763993756769, guid: 4bb8cb869e93541fead91443b0f17578,
       type: 3}
     duration: 5
     repetitions: 1

@@ -256,6 +256,11 @@ MonoBehaviour:
   alignment: 1
   scoreValue: 100
   maxHealth: 1
+  bumpDamage: 1
+  sprite: {fileID: 0}
+  shieldSprite: {fileID: 0}
+  damageFlashColor: {r: 1, g: 0, b: 0, a: 1}
+  invincibilityDuration: 0
 --- !u!114 &8724038981984984279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,6 +278,7 @@ MonoBehaviour:
   accel: 3
   decel: 1
   keepInBounds: 0
+  rotateWithMovement: 0
 --- !u!114 &8724038981984984276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,8 +291,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215d5065cc0fe4bf3995595cb0b6a340, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 8724038980739564644}
+  entryTime: 0.5
+  activeTime: 0
 --- !u!50 &8724038981984984278
 Rigidbody2D:
   serializedVersion: 4

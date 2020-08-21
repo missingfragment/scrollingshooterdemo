@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace SpaceShooterDemo
 {
+    /// <summary>
+    /// A class for controlling SpaceShips through AI.
+    /// </summary>
     public class AiControl : ShipControl
     {
         [SerializeField]

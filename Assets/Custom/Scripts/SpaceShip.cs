@@ -55,6 +55,9 @@ namespace SpaceShooterDemo
 
         private int damage;
 
+        private Coroutine damageFlashCoroutine;
+        private Coroutine invincibilityCoroutine;
+
         public Team Alignment => alignment;
 
         // properties
@@ -98,7 +101,7 @@ namespace SpaceShooterDemo
             //yield return new WaitForSeconds(.2f);
             float progress = 0f;
 
-            float flashSpeed = 1.5f;
+            float flashSpeed = 10f;
 
             Color startColor = sprite.color;
 
@@ -166,11 +169,20 @@ namespace SpaceShooterDemo
             // If amount is less than zero, it is healing.
             if (amount > 0)
             {
-                StartCoroutine(DamageFlash());
+                if (damageFlashCoroutine != null)
+                {
+                    StopCoroutine(damageFlashCoroutine);
+                }
+                damageFlashCoroutine = StartCoroutine(DamageFlash());
 
                 if (invincibilityDuration > 0f)
                 {
-                    StartCoroutine(TemporaryInvincibility());
+                    if (invincibilityCoroutine != null)
+                    {
+                        StopCoroutine(invincibilityCoroutine);
+                    }
+                    invincibilityCoroutine =
+                        StartCoroutine(TemporaryInvincibility());
                 }
             }
 

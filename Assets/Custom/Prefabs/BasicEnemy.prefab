@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   power: 1
   cooldownDuration: 1.5
-  soundEffectId: e_laser
 --- !u!82 &2822223103685935886
 AudioSource:
   m_ObjectHideFlags: 0
@@ -124,6 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9dc0c591987e41fa98502b4db762511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volleyLength: 0
+  reloadDuration: 0
 --- !u!114 &7785950974739936316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,11 +230,6 @@ PrefabInstance:
       propertyPath: weapons.Array.data[0]
       value: 
       objectReference: {fileID: 2922203914038026698}
-    - target: {fileID: 8724038981984984276, guid: 55c6f3274d81c4acd811e67e83be22db,
-        type: 3}
-      propertyPath: entryTime
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8724038981984984276, guid: 55c6f3274d81c4acd811e67e83be22db,
         type: 3}
       propertyPath: stationaryTime
