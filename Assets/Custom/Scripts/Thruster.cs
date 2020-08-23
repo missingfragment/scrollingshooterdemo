@@ -24,8 +24,10 @@ namespace SpaceShooterDemo
 
         private void Update()
         {
-            Vector2 velocity = mover.Inputs;
-            if (velocity.y > 0)
+            //Vector2 velocity = mover.Inputs;
+            Vector2 velocity = mover.Velocity;
+            var minSpeed = .1f;
+            if (velocity.y > minSpeed)
             {
                 largeThruster.SetActive(true);
                 smallThruster.SetActive(false);
@@ -35,7 +37,7 @@ namespace SpaceShooterDemo
                     particles.Play();
                 }
             }
-            else if (velocity.y < 0)
+            else if (velocity.y < -minSpeed)
             {
                 largeThruster.SetActive(false);
                 smallThruster.SetActive(false);

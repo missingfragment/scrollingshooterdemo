@@ -68,7 +68,7 @@ namespace SpaceShooterDemo
 
             coroutine = StartCoroutine(
                 animatedScore.Animate(
-                    (float)e.OldValue, (float)e.NewValue,
+                    e.OldValue, e.NewValue,
                     Mathf.Lerp, UpdateScoreText
                     )
                 );

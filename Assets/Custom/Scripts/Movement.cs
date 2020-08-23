@@ -22,7 +22,6 @@ namespace SpaceShooterDemo
 
         protected Camera mainCamera;
 
-        private Vector2 screenBounds;
         private float objectWidth;
         private float objectHeight;
 
@@ -38,10 +37,6 @@ namespace SpaceShooterDemo
         private void Start()
         {
             mainCamera = Camera.main;
-            screenBounds = mainCamera.ScreenToWorldPoint(
-                new Vector3(Screen.width, Screen.height,
-                mainCamera.transform.position.z)
-                );
             objectWidth = sprite.bounds.extents.x;
             objectHeight = sprite.bounds.extents.y;
         }
@@ -95,6 +90,9 @@ namespace SpaceShooterDemo
 
             // keep object inside the screen boundaries
             Vector3 position = transform.position;
+
+            Vector3 screenBounds = mainCamera.ViewportToWorldPoint(
+                new Vector3(1, 1, mainCamera.nearClipPlane));
 
             position.x = Mathf.Clamp(position.x,
                 -screenBounds.x + objectWidth,

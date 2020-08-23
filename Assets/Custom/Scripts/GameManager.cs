@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace SpaceShooterDemo
 {
@@ -30,6 +31,8 @@ namespace SpaceShooterDemo
         private static byte lives;
 
         private int extraLifeThreshold = EXTRA_LIFE_BASE_THRESHOLD;
+
+        public bool Pause { get; private set; }
 
         // properties
         public static int Score
@@ -68,12 +71,33 @@ namespace SpaceShooterDemo
         {
             SpaceShip.Destroyed += OnShipDestroyed;
             ScoreChanged += OnScoreChanged;
+
+            InputHandler.InputReceived += OnInput;
         }
 
         private void OnDisable()
         {
             SpaceShip.Destroyed -= OnShipDestroyed;
             ScoreChanged -= OnScoreChanged;
+
+            InputHandler.InputReceived -= OnInput;
+        }
+
+        private void OnInput(InputAction.CallbackContext context)
+        {
+            if (context.action.name == "Pause")
+            {
+                Pause = !Pause;
+
+                if (Pause)
+                {
+                    Time.timeScale = 0f;
+                }
+                else
+                {
+                    Time.timeScale = 1f;
+                }
+            }
         }
 
         private void OnScoreChanged(object sender, ScoreChangedEventArgs e)

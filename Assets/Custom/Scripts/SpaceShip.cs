@@ -58,6 +58,9 @@ namespace SpaceShooterDemo
         private Coroutine damageFlashCoroutine;
         private Coroutine invincibilityCoroutine;
 
+        private AnimatedValue<Color> damageFlash
+            = new AnimatedValue<Color>(10f);
+
         public Team Alignment => alignment;
 
         // properties
@@ -93,26 +96,6 @@ namespace SpaceShooterDemo
                 };
 
             HealthChanged?.Invoke(this, args);
-        }
-
-        private IEnumerator DamageFlash()
-        {
-            sprite.color = damageFlashColor;
-            //yield return new WaitForSeconds(.2f);
-            float progress = 0f;
-
-            float flashSpeed = 10f;
-
-            Color startColor = sprite.color;
-
-            while (progress < 1f)
-            {
-                sprite.color = Color.Lerp(startColor, Color.white,
-                    progress);
-                progress += flashSpeed * Time.deltaTime;
-                yield return null;
-            }
-            sprite.color = Color.white;
         }
 
         protected IEnumerator TemporaryInvincibility(float? duration = null)
@@ -173,7 +156,16 @@ namespace SpaceShooterDemo
                 {
                     StopCoroutine(damageFlashCoroutine);
                 }
-                damageFlashCoroutine = StartCoroutine(DamageFlash());
+                //damageFlashCoroutine = StartCoroutine(DamageFlash());
+
+                damageFlashCoroutine = StartCoroutine(
+                    damageFlash.Animate(
+                        damageFlashColor,
+                        Color.white,
+                        Color.Lerp,
+                        (Color color) => sprite.color = color
+                        )
+                    );
 
                 if (invincibilityDuration > 0f)
                 {
