@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace SpaceShooterDemo
 {
@@ -27,6 +28,9 @@ namespace SpaceShooterDemo
         private const float RESPAWN_DELAY = 1f;
 
         // fields
+
+        public static GameManager Instance { get; private set; }
+
         private static int score;
         private static byte lives;
 
@@ -61,6 +65,18 @@ namespace SpaceShooterDemo
             }
         }
 
+        private void Awake()
+        {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+
+                return;
+            }
+
+            Instance = this;
+        }
+
         private void Start()
         {
             Score = 0;
@@ -81,6 +97,27 @@ namespace SpaceShooterDemo
             ScoreChanged -= OnScoreChanged;
 
             InputHandler.InputReceived -= OnInput;
+        }
+
+        public IEnumerator LoadScene(string scene)
+        {
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
+
+            while (!asyncLoad.isDone)
+            {
+                yield return null;
+            }
+        }
+
+        public void StartGame()
+        {
+            StartCoroutine(LoadScene("main"));
+        }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+            Debug.Log("Exiting game.");
         }
 
         private void OnInput(InputAction.CallbackContext context)
