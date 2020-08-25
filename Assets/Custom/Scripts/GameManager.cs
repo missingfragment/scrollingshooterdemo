@@ -99,7 +99,7 @@ namespace SpaceShooterDemo
             InputHandler.InputReceived -= OnInput;
         }
 
-        public IEnumerator LoadScene(string scene)
+        private IEnumerator LoadScene(string scene)
         {
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
 

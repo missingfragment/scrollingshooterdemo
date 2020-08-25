@@ -42,6 +42,11 @@ namespace SpaceShooterDemo
 
         private void OnFireInput(InputAction.CallbackContext context)
         {
+            if (Time.timeScale == 0)
+            {
+                return;
+            }
+
             firing = !context.canceled;
         }
     }
