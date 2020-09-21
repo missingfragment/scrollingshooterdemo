@@ -58,7 +58,7 @@ namespace SpaceShooterDemo
         private Coroutine damageFlashCoroutine;
         private Coroutine invincibilityCoroutine;
 
-        private AnimatedValue<Color> damageFlash
+        private readonly AnimatedValue<Color> damageFlash
             = new AnimatedValue<Color>(10f);
 
         public Team Alignment => alignment;

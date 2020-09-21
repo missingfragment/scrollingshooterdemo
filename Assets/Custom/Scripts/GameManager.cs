@@ -103,6 +103,8 @@ namespace SpaceShooterDemo
         {
             AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
 
+            asyncLoad.allowSceneActivation = false;
+
             while (!asyncLoad.isDone)
             {
                 yield return null;
@@ -126,14 +128,7 @@ namespace SpaceShooterDemo
             {
                 Pause = !Pause;
 
-                if (Pause)
-                {
-                    Time.timeScale = 0f;
-                }
-                else
-                {
-                    Time.timeScale = 1f;
-                }
+                Time.timeScale = Pause ? 0f : 1f;
             }
         }
 
