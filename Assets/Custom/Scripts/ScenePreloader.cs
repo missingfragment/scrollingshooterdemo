@@ -10,10 +10,17 @@ public class ScenePreloader : MonoBehaviour
     public event Action SceneReady;
 
     [SerializeField]
+<<<<<<< HEAD
     private int sceneBuildIndex = default;
 
     [SerializeField]
     private TMP_Text loadingText = default;
+=======
+    private int sceneBuildIndex;
+
+    [SerializeField]
+    private TMP_Text loadingText;
+>>>>>>> 9d50e84c578830caa6cac6bbb849d2631896aacc
 
     private AsyncOperation asyncLoad;
 
